@@ -192,8 +192,8 @@
 
             if (montant >= 1.03 && montant <= 207000) {
                 var taux = 100/103.5;
-                frais = taux * montant;
-                var total = montant - frais ;
+                total = taux * montant;
+                //var total = montant - frais ;
                 resultat.innerHTML = `<p id="title-2">Retrait-MoMo</p>
                 <input type="number" id="montant-retrait" placeholder="Entrez le montant">
                 <button type="button" id="btn-retrait" onclick="fraisRetrait()">Calculer</button>
@@ -202,8 +202,8 @@
             }
             else if (montant >= 207001 && montant <= 257500) {
                 var taux = 100/101;
-                frais = montant - 5000;
-                var total = frais * taux ;
+                total = montant - 5000;
+                //var total = frais * taux ;
                 resultat.innerHTML = `<p id="title-2">Retrait-MoMo</p>
                 <input type="number" id="montant-retrait" placeholder="Entrez le montant">
                 <button type="button" id="btn-retrait" onclick="fraisRetrait()">Calculer</button>
