@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Centrer un élément</title>
+    <style>
+        body {
+            position: relative;
+            height: 100vh;
+            /* Prend toute la hauteur de la fenêtre */
+            margin: 0;
+            /* Supprime les marges par défaut */
+        }
+
+        .element {
+            position: absolute;
+            top: 50%;
+            /* Positionne à 50% de la hauteur */
+            left: 50%;
+            /* Positionne à 50% de la largeur */
+            transform: translate(-50%, -50%);
+            /* Centre l'élément */
+            /* background-color: lightcoral; */
+            padding: 20px;
+            /* border: 1px solid red; */
+            text-align: center;
+            box-shadow: rgba(50, 162, 253, 0.4) 0px 7px 29px 0px;
+            border-radius: 10px;
+        }
+
+        .cards {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            /* align-items: center; */
+            gap: 20px;
+            /* border: red solid 1px; */
+        }
+
+        .card {
+            width: 200px;
+            /* height: 160px; */
+            /* border: solid 1px yellow; */
+            border-radius: 10px;
+        }
+
+        .first {
+            border: #ff6600 solid 1px;
+        }
+        .second {
+            border: #026e64 solid 1px;
+        }
+        .first #title-1 {
+            font-weight: bold;
+            color: #ff6600;
+        }
+
+        .second #title-2 {
+            font-weight: bold;
+            color: #026e64;
+        }
+        .title p {
+            font-size: 1.5em;
+            font-weight: bold;
+        }
+
+
+        #montant-envoie,
+        #montant-retrait {
+            border-radius: 10px;
+            margin-bottom: 5px;
+            padding: 5px;
+            text-align: center;
+            background-color: white;
+        }
+
+        #montant-envoie:focus {
+            border: 2px solid #ff6600;
+            outline: 0;
+        }
+
+        #montant-retrait:focus {
+            border: 2px solid #026e64;
+            outline: 0;
+        }
+
+        #btn-envoie,
+        #btn-retrait {
+            border-radius: 5px;
+            color: aliceblue;
+            padding: 5px;
+            margin-bottom: 10px;
+        }
+
+        #btn-envoie {
+            background-color: #ff6600;
+        }
+
+        #btn-retrait {
+            background-color: #026e64;
+        }
+
+        #btn-envoie:hover {
+            background-color: #fa914b;
+        }
+
+        #btn-retrait:hover {
+            background-color: #6ab1aa;
+        }
+        span{
+            /* font-weight: bold; */
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .footer {
+            font-style: italic;
+            color: #726a64;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="element">
+        <div class="title">
+            <p>Calculateur des frais MoMo</p>
+        </div>
+
+        <div class="cards">
+            <div id="div-envoie" class="card first">
+                <p id="title-1">Envoie-MoMo</p>
+                <input type="number" id="montant-envoie" placeholder="Entrez le montant">
+                <button type="button" id="btn-envoie" onclick="fraisEnvoie()">Calculer</button>
+                <!-- <p id="resultat-envoie"></p> -->
+            </div>
+            <div id="div-retrait" class="card second">
+                <p id="title-2">Retrait-MoMo</p>
+                <input type="number" id="montant-retrait" placeholder="Entrez le montant">
+                <button type="button" id="btn-retrait" onclick="fraisRetrait()">Calculer</button>
+                <!-- <p id="resultat-reception">Resultat ici ....</p> -->
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>Created By <span style="font-weight: bold;">RLOA</span>.</p>
+        </div>
+    </div>
+
+
+    <script>
+        function fraisEnvoie() {
+            const montant = parseFloat(document.getElementById('montant-envoie').value);
+            const resultat = document.getElementById('div-envoie');
+
+            let frais = 0;
+            var total = 0;
+
+            if (montant >= 1 && montant <= 200000) {
+                var taux = 0.035;
+                frais = taux * montant;
+                var total = montant + frais ;
+                resultat.innerHTML = `<p id="title-1">Envoie-MoMo</p>
+                <input type="number" id="montant-envoie" placeholder="Entrez le montant">
+                <button type="button" id="btn-envoie" onclick="fraisEnvoie()">Calculer</button>
+                <p>Pour ${montant}, il faut <span style="color:blue">${frais.toFixed(2)}</span>. Disposez <span style="color:red">${total.toFixed(2)} FCFA</span></p>
+                `;
+            }
+            else if (montant >= 200001 && montant <= 250000) {
+                frais = 0.01 * montant + 5000 ;
+                total = montant + frais;
+                resultat.innerHTML = `<p id="title-1">Envoie-MoMo</p>
+                <input type="number" id="montant-envoie" placeholder="Entrez le montant">
+                <button type="button" id="btn-envoie" onclick="fraisEnvoie()">Calculer</button>
+                <p>Pour ${montant}, il faut <span style="color:blue">${frais.toFixed(2)}</span>. Disposez <span style="color:red">${total.toFixed(2)} FCFA</span></p>
+                `;
+            } else {
+                console.log("Entrez un montant valide svp !");
+                resultat.innerHTML = `<p id="title-1">Envoie-MoMo</p>
+                <input type="number" id="montant-envoie" placeholder="Entrez le montant">
+                <button type="button" id="btn-envoie" onclick="fraisEnvoie()">Calculer</button>
+                <p>Veuillez entrer un montant valide !</p>
+                `;
+            }
+        }
+        
+        function fraisRetrait(){
+            const montant = parseFloat(document.getElementById('montant-retrait').value);
+            const resultat = document.getElementById('div-retrait');
+
+            let frais = 0;
+            var total = 0;
+
+            if (montant >= 1.03 && montant <= 207000) {
+                var taux = 100/103.5;
+                frais = taux * montant;
+                var total = montant - frais ;
+                resultat.innerHTML = `<p id="title-2">Retrait-MoMo</p>
+                <input type="number" id="montant-retrait" placeholder="Entrez le montant">
+                <button type="button" id="btn-retrait" onclick="fraisRetrait()">Calculer</button>
+                <p>Avec <span style="color:blue">${montant}</span> vous pouvez retirer : <span style="color:green"> ${total.toFixed(2)} FCFA</span></p>
+                `;
+            }
+            else if (montant >= 207001 && montant <= 257500) {
+                var taux = 100/101;
+                frais = montant - 5000;
+                var total = frais * taux ;
+                resultat.innerHTML = `<p id="title-2">Retrait-MoMo</p>
+                <input type="number" id="montant-retrait" placeholder="Entrez le montant">
+                <button type="button" id="btn-retrait" onclick="fraisRetrait()">Calculer</button>
+                <p>Avec <span style="color:blue">${montant}</span> vous pouvez retirer : <span style="color:green"> ${total.toFixed(2)} FCFA</span></p>
+                `;
+            } else {
+                console.log("Entrez un montant valide svp !");
+                resultat.innerHTML = `<p id="title-2">Retrait-MoMo</p>
+                <input type="number" id="montant-retrait" placeholder="Entrez le montant">
+                <button type="button" id="btn-retrait" onclick="fraisRetrait()">Calculer</button>
+                <p style="color:red">Veuillez entrer un montant valide !</p>
+                `;
+            }
+        }
+    </script>
+</body>
+
+</html>
